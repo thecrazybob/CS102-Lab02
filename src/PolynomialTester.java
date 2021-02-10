@@ -20,8 +20,8 @@ public class PolynomialTester {
         System.out.println("emptyConstructor toString(): " + emptyConstructor.toString());
         System.out.println("singleConstructor toString(): " + singleConstructor.toString());
         System.out.println("arrayConstructor toString(): " + arrayConstructor.toString());
-        System.out.println("arrayConstructor eval(): " + arrayConstructor.eval(1));
-        System.out.println("arrayConstructor eval2(): " + arrayConstructor.eval2(1));
+        System.out.println("arrayConstructor eval(): " + arrayConstructor.eval(2));
+        System.out.println("arrayConstructor eval2(): " + arrayConstructor.eval2(2));
 
     }
 

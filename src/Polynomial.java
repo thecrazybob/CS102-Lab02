@@ -100,14 +100,12 @@ public class Polynomial {
                 }
 
                 // add a positive sign if coefficient is positive
-                if (coefficients[i] > 0) {
+                if (coefficients[i] > 0 && i != 0) {
                     sign = "+";
                 }
 
                 // form string for a single polynomial term
-                if ((i != this.coefficients.length - 1) && (i != 0)) {
                     polynomialString = sign + " " + polynomialString + " ";
-                }
 
             }
 
@@ -129,16 +127,9 @@ public class Polynomial {
     public double eval(double x) {
 
         double sum = 0;
-        int power = 1;
 
         for (int i = 0; i < this.coefficients.length; i++) {
-            if (powers[i] == 0) { 
-                power = 1;
-            }
-            else {
-                power = powers[i];
-            }
-            sum += Math.pow(coefficients[i] * x, power);
+            sum += this.coefficients[i] * Math.pow(x, powers[i]);
         }
 
         return sum;
@@ -151,13 +142,13 @@ public class Polynomial {
      */
     public double eval2(double x) {
 
-        double result = 0;
+        double sum = 0;
 
-        for (int i = 0; i < this.coefficients.length; i++) {
-            result = result * x + this.coefficients[i];
+        for (int i = this.coefficients.length - 1; i >= 0; i--) {
+            sum = (x * sum) + coefficients[i];
         }
 
-        return result;
+        return sum;
 
     }
 
