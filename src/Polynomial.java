@@ -69,7 +69,7 @@ public class Polynomial {
      * @return int
      */
     public int getDegree() {
-        return this.powers[this.coefficients.length];
+        return this.powers[this.coefficients.length - 1];
     }
 
     
