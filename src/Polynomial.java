@@ -41,6 +41,7 @@ public class Polynomial {
         this.powers = new int[coefficients.length];
 
         this.coefficients = coefficients;
+
         for (int i = 0; i < this.coefficients.length; i++) {
             this.powers[i] = i;
         }
@@ -58,12 +59,12 @@ public class Polynomial {
 
         this.polynomial = "";
         
-        for (int i = 0; i < coefficients.length; i++) {
+        for (int i = 0; i < this.coefficients.length; i++) {
 
             String polynomialString = "";
             String sign;
 
-            if (coefficients[i] != 0) {
+            if (this.coefficients[i] != 0) {
                 polynomialString = polynomialString + coefficients[i];
             
                 if (powers[i] != 0) {
@@ -77,7 +78,7 @@ public class Polynomial {
                     sign = "+";
                 }
 
-                if ((i != coefficients.length - 1) && (i != 0)) {
+                if ((i != this.coefficients.length - 1) && (i != 0)) {
                     polynomialString = sign + " " + polynomialString + " ";
                 }
 
@@ -88,7 +89,24 @@ public class Polynomial {
         return this.polynomial;
     }
 
-    // public eval(double x) {
+    public double eval(double x) {
+        double sum = 0;
+        int power = 1;
+
+        for (int i = 0; i < this.coefficients.length; i++) {
+            if (powers[i] == 0) { 
+                power = 1;
+            }
+            else {
+                power = powers[i];
+            }
+            sum += Math.pow(coefficients[i] * x, power);
+        }
+
+        return sum;
+    }
+
+    // public double eval2(double x) {
 
     // }
 
