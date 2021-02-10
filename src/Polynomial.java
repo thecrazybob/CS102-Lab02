@@ -24,7 +24,11 @@ public class Polynomial {
         this.powers[0] = 0;
     } 
 
-    // first parametized constructor
+    /**
+     * Constructor which takes an degree 'd' and a coefficient 'c'
+     * @param int d
+     * @param double c
+     */
     public Polynomial(int d, double c) {
 
         this.coefficients = new double[1]; 
@@ -34,7 +38,9 @@ public class Polynomial {
         this.powers[0] = d;
     }
 
-    // second parametized constructor
+    /**
+     * Constructor which takes an array of coefficients of type double
+     */
     public Polynomial(double[] coefficients) {
 
         this.coefficients = new double[coefficients.length]; 
@@ -47,49 +53,81 @@ public class Polynomial {
         }
     }
 
+    
+    /** 
+     * Return coefficient of a given degree
+     * @param int degree
+     * @return double
+     */
     public double getCoefficient(int degree) {
         return this.coefficients[degree];
     }
 
+    
+    /** 
+     * Return degree of the polynomial
+     * @return int
+     */
     public int getDegree() {
         return this.powers[this.coefficients.length];
     }
 
+    
+    /** 
+     * Return a string representation of the polynomial
+     * @return String
+     */
     public String toString() {
 
+        // initialize global property
         this.polynomial = "";
         
+        // loop through coefficients
         for (int i = 0; i < this.coefficients.length; i++) {
 
+            // local variables for temporary storing/naming
             String polynomialString = "";
-            String sign;
+            String sign = "";
 
+            // calculate a single term of the polynomial
             if (this.coefficients[i] != 0) {
+
                 polynomialString = polynomialString + coefficients[i];
-            
+                
+                // skip degree/x term if power is 0
                 if (powers[i] != 0) {
                     polynomialString = polynomialString + "x^" + powers[i];
                 }
 
-                if (coefficients[i] < 0) {
-                    sign = "";
-                }
-                else {
+                // add a positive sign if coefficient is positive
+                if (coefficients[i] > 0) {
                     sign = "+";
                 }
 
+                // form string for a single polynomial term
                 if ((i != this.coefficients.length - 1) && (i != 0)) {
                     polynomialString = sign + " " + polynomialString + " ";
                 }
 
             }
+
+            // assign the formed string to global property
             this.polynomial = this.polynomial + polynomialString;
+        
         }
 
+        // return the string representation
         return this.polynomial;
     }
 
+    
+    /** 
+     * Evaluates the polynomial at a given x and returns the result
+     * @param double x
+     * @return double
+     */
     public double eval(double x) {
+
         double sum = 0;
         int power = 1;
 
@@ -106,8 +144,21 @@ public class Polynomial {
         return sum;
     }
 
-    // public double eval2(double x) {
+    /** 
+     * Returns the evaluation of the polynomial by using Horner's method
+     * @param double x
+     * @return double
+     */
+    public double eval2(double x) {
 
-    // }
+        double result = 0;
+
+        for (int i = 0; i < this.coefficients.length; i++) {
+            result = result * x + this.coefficients[i];
+        }
+
+        return result;
+
+    }
 
 }
