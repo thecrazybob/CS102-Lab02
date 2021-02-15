@@ -1,6 +1,6 @@
-## Getting Started
+## CS102 - Lab02
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+An attempt to perform Lab02 for the CS102 course. Instructions for the lab can be found in the "CS102_Lab02.pdf" file located in the root directory of the repository.
 
 ## Folder Structure
 

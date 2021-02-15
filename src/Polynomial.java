@@ -1,11 +1,11 @@
 /**
- * Lab01
- * Instructions for Lab01 are in CS102_Lab01.pdf file located in the root directory of Lab01
- * Revisions can be seen on the following GitHub URL: https://github.com/thecrazybob/CS102-lab01
+ * Lab02
+ * Instructions for Lab02 are in CS102_Lab02.pdf file located in the root directory of Lab02
+ * Revisions can be seen on the following GitHub URL: https://github.com/thecrazybob/CS102-lab02
  * Style Guidelines: http://www.cs.bilkent.edu.tr/~adayanik/cs101/practicalwork/styleguidelines.htm
  *
  * @author Mohammed Sohail
- * @version 10/02/2021
+ * @version 15/02/2021
  */
 
 public class Polynomial {
@@ -105,7 +105,7 @@ public class Polynomial {
                 }
 
                 // form string for a single polynomial term
-                    polynomialString = sign + " " + polynomialString + " ";
+                polynomialString = sign + " " + polynomialString + " ";
 
             }
 
