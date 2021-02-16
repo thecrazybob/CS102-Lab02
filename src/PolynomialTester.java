@@ -14,7 +14,7 @@ public class PolynomialTester {
         Polynomial emptyConstructor = new Polynomial();
         Polynomial singleConstructor = new Polynomial(5,5);
 
-        double[] coefficients = {2,3,4,-5,6};
+        double[] coefficients = {3,4,5,2};
         Polynomial arrayConstructor = new Polynomial(coefficients);
         
         System.out.println("emptyConstructor toString(): " + emptyConstructor.toString());
@@ -25,6 +25,23 @@ public class PolynomialTester {
         System.out.println("arrayConstructor eval(): " + arrayConstructor.eval(2));
         System.out.println("arrayConstructor eval2(): " + arrayConstructor.eval2(2));
 
+        // Lab02 Unit Tests
+
+        System.out.println();
+        
+        System.out.println("Lab02 Testing starts here:");
+        // 1. Test the add() method
+        Polynomial P = new Polynomial(coefficients);
+        System.out.println("P(x) toString(): " + P.toString());
+        
+        double[] qCoefficients = {2,4,1};
+        Polynomial Q = new Polynomial(qCoefficients);
+        System.out.println("Q(x) toString(): " + Q.toString());
+
+        System.out.println();
+
+        Polynomial PQ = P.add(Q);
+        System.out.println("add() toString(): " + PQ.toString());
     }
 
 }

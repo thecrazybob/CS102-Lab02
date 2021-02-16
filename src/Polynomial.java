@@ -11,9 +11,9 @@
 public class Polynomial {
     
     // properties
-    private double[] coefficients;
-    private int[] powers;
-    private String polynomial;
+    public double[] coefficients;
+    public int[] powers;
+    public String polynomial;
 
     // default constructor
     public Polynomial() {
@@ -53,6 +53,37 @@ public class Polynomial {
         }
     }
 
+    /** 
+     * Sums the current object's coefficients and the input object's coefficient and returns a new polynomial consisting of the resulting polynomial
+     * @param p2
+     * @return Polynomial
+     */
+    public Polynomial add(Polynomial p2) {
+        
+        // New array of coefficients for the sum of the two polynomials
+        double[] newCoefficients = new double[this.coefficients.length + p2.coefficients.length];
+
+        // Compare and get greatest length of coefficients
+        int length = p2.coefficients.length > this.coefficients.length ? p2.coefficients.length : this.coefficients.length;
+
+        // Loop till the greatest length and add each coefficients
+        for (int i = 0; i < length; i++) {
+
+            // Use 0 if index does not exist in either coefficients array
+            double existingCoefficient = (this.coefficients.length > i) ? this.coefficients[i] : 0;
+            double inputCoefficient = (p2.coefficients.length > i) ? p2.coefficients[i] : 0;
+
+            // Form the new coeffficients array
+            newCoefficients[i] = existingCoefficient + inputCoefficient;
+        }
+
+        // Form the new polynomial using the newly created coefficients array
+        Polynomial newPolynomial = new Polynomial(newCoefficients);
+
+        // Return the newPolynomial object
+        return newPolynomial;
+
+    }
     
     /** 
      * Return coefficient of a given degree
