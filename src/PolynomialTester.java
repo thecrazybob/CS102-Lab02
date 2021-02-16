@@ -28,7 +28,7 @@ public class PolynomialTester {
         // Lab02 Unit Tests
 
         System.out.println();
-        
+
         System.out.println("Lab02 Testing starts here:");
         // 1. Test the add() method
         Polynomial P = new Polynomial(coefficients);
@@ -40,8 +40,11 @@ public class PolynomialTester {
 
         System.out.println();
 
-        Polynomial PQ = P.add(Q);
-        System.out.println("add() toString(): " + PQ.toString());
+        Polynomial pqAdd = P.add(Q);
+        System.out.println("add() toString(): " + pqAdd.toString());
+
+        Polynomial pqSub = P.subtract(Q);
+        System.out.println("subtract() toString(): " + pqSub.toString());
     }
 
 }

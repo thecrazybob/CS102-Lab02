@@ -53,12 +53,7 @@ public class Polynomial {
         }
     }
 
-    /** 
-     * Sums the current object's coefficients and the input object's coefficient and returns a new polynomial consisting of the resulting polynomial
-     * @param p2
-     * @return Polynomial
-     */
-    public Polynomial add(Polynomial p2) {
+    private Polynomial operate(String operation, Polynomial p2) {
         
         // New array of coefficients for the sum of the two polynomials
         double[] newCoefficients = new double[this.coefficients.length + p2.coefficients.length];
@@ -74,7 +69,12 @@ public class Polynomial {
             double inputCoefficient = (p2.coefficients.length > i) ? p2.coefficients[i] : 0;
 
             // Form the new coeffficients array
-            newCoefficients[i] = existingCoefficient + inputCoefficient;
+            if (operation == "add") {
+                newCoefficients[i] = existingCoefficient + inputCoefficient;
+            }
+            else {
+                newCoefficients[i] = existingCoefficient - inputCoefficient;
+            }
         }
 
         // Form the new polynomial using the newly created coefficients array
@@ -82,6 +82,27 @@ public class Polynomial {
 
         // Return the newPolynomial object
         return newPolynomial;
+    }
+
+    /** 
+     * Sums the current object's coefficients and the input object's coefficients and returns a new polynomial consisting of the resulting polynomial
+     * @param p2
+     * @return Polynomial
+     */
+    public Polynomial add(Polynomial p2) {
+        
+        return this.operate("add", p2);
+
+    }
+
+    /** 
+     * Subtracts the input object's coefficients from the current object's coefficients and returns a new polynomial consisting of the resulting polynomial
+     * @param p2
+     * @return Polynomial
+     */
+    public Polynomial subtract(Polynomial p2) {
+        
+        return this.operate("subtract", p2);
 
     }
     
