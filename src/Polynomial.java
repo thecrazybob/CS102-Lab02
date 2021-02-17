@@ -53,6 +53,13 @@ public class Polynomial {
         }
     }
 
+    
+    /** 
+     * This method is used to assist with add() and sub() method, it adds or subtracts the polynomial based on the input
+     * @param operation (add/subtract)
+     * @param p2 the polynomial to be added or subtracted
+     * @return Polynomial
+     */
     private Polynomial operate(String operation, Polynomial p2) {
         
         // New array of coefficients for the sum of the two polynomials
@@ -100,9 +107,58 @@ public class Polynomial {
      * @param p2
      * @return Polynomial
      */
-    public Polynomial subtract(Polynomial p2) {
+    public Polynomial sub(Polynomial p2) {
         
         return this.operate("subtract", p2);
+
+    }
+
+    /** 
+     * Multiplies the current polynomial with the input polynomial and returns a new polynomial consisting of the resulting polynomial
+     * @param p2 the polynomial to be multiplied
+     * @return Polynomial
+     */
+    public Polynomial mul(Polynomial p2) {
+
+        // Longest coefficient array
+        double[] longestCoefficients = p2.coefficients.length > this.coefficients.length ? p2.coefficients : this.coefficients;
+
+        // Smallest coefficient array
+        double[] smallestCoefficients = p2.coefficients.length > this.coefficients.length ? this.coefficients : p2.coefficients;
+
+        // Initialize a new polynomial
+        Polynomial newPolynomial = new Polynomial();
+
+        // Loop through longest coefficients array
+        for (int index = 0; index < longestCoefficients.length; index++) {
+            
+            // Initialize newCoefficients array
+            double[] newCoefficients = new double[smallestCoefficients.length + index];
+
+            // Loop through smallestCoefficients array
+            for (int i = 0; i < smallestCoefficients.length; i++ ) {
+
+                // find exponent of the current item in the longestCoefficients array
+                int exponent = this.powers[index];
+
+                // fill newCoefficients array with zeroes till the current exponent is reached
+                for (int exponentI = 0; exponentI < exponent; exponentI++) {
+                    newCoefficients[exponentI] = 0;
+                }
+
+                // multiply and add the result to the newCoefficients array
+                newCoefficients[exponent + i] = longestCoefficients[index] * smallestCoefficients[i];
+
+            }
+
+            // Use the add method to add the newly formed coefficients array with an existing one
+            // incase its the first time the loop ran, it will add it to an empty Polynomial object initialized above
+            newPolynomial = newPolynomial.add(new Polynomial(newCoefficients));
+
+        }
+
+        // Return the newly formed polynomial
+        return newPolynomial;
 
     }
     

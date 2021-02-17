@@ -43,8 +43,11 @@ public class PolynomialTester {
         Polynomial pqAdd = P.add(Q);
         System.out.println("add() toString(): " + pqAdd.toString());
 
-        Polynomial pqSub = P.subtract(Q);
-        System.out.println("subtract() toString(): " + pqSub.toString());
+        Polynomial pqSub = P.sub(Q);
+        System.out.println("sub() toString(): " + pqSub.toString());
+
+        Polynomial pqMul = P.mul(Q);
+        System.out.println("mul() toString(): " + pqMul.toString());
     }
 
 }
