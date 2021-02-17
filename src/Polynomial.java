@@ -12,30 +12,28 @@ public class Polynomial {
     
     // properties
     public double[] coefficients;
-    public int[] powers;
-    public String polynomial;
+    public int degree;
 
     // default constructor
     public Polynomial() {
-        this.coefficients = new double[1]; 
-        this.powers = new int[1];
 
+        this.coefficients = new double[1]; 
         this.coefficients[0] = 0;
-        this.powers[0] = 0;
+        this.degree = 0;
+    
     } 
 
     /**
      * Constructor which takes an degree 'd' and a coefficient 'c'
-     * @param int d
-     * @param double c
+     * @param int d The degree
+     * @param double c The coefficient
      */
-    public Polynomial(int d, double c) {
+    public Polynomial(int degree, double coefficient) {
+        
+        this.coefficients      = new double[1]; 
+        this.coefficients[0]   = coefficient;
+        this.degree            = -1;
 
-        this.coefficients = new double[1]; 
-        this.powers = new int[1];
-
-        this.coefficients[0] = c;
-        this.powers[0] = d;
     }
 
     /**
@@ -44,13 +42,11 @@ public class Polynomial {
     public Polynomial(double[] coefficients) {
 
         this.coefficients = new double[coefficients.length]; 
-        this.powers = new int[coefficients.length];
-
+        
         this.coefficients = coefficients;
+        
+        this.degree = this.getDegree();
 
-        for (int i = 0; i < this.coefficients.length; i++) {
-            this.powers[i] = i;
-        }
     }
 
     
@@ -131,7 +127,7 @@ public class Polynomial {
 
         // Loop through longest coefficients array
         for (int index = 0; index < longestCoefficients.length; index++) {
-            
+                        
             // Initialize newCoefficients array
             double[] newCoefficients = new double[smallestCoefficients.length + index];
 
@@ -139,7 +135,7 @@ public class Polynomial {
             for (int i = 0; i < smallestCoefficients.length; i++ ) {
 
                 // find exponent of the current item in the longestCoefficients array
-                int exponent = this.powers[index];
+                int exponent = index;
 
                 // fill newCoefficients array with zeroes till the current exponent is reached
                 for (int exponentI = 0; exponentI < exponent; exponentI++) {
@@ -163,6 +159,26 @@ public class Polynomial {
     }
     
     /** 
+     * Composes the current polynomial with the input polynomial and returns a new polynomial consisting of the resulting polynomial
+     * @param p2 - the polynomial to be composed
+     * @return Polynomial
+     */
+    public Polynomial compose(Polynomial p2) {
+        
+        Polynomial newPolynomial = new Polynomial(0, 0);
+
+        for (int i = this.getDegree(); i >= 0; i--) {
+
+            Polynomial term = new Polynomial(0, this.coefficients[i]);
+            newPolynomial = term.add(p2.mul(newPolynomial));
+            
+        }
+
+        return newPolynomial;
+    
+    }
+
+    /** 
      * Return coefficient of a given degree
      * @param int degree
      * @return double
@@ -170,14 +186,23 @@ public class Polynomial {
     public double getCoefficient(int degree) {
         return this.coefficients[degree];
     }
-
     
     /** 
      * Return degree of the polynomial
      * @return int
      */
     public int getDegree() {
-        return this.powers[this.coefficients.length - 1];
+
+        // Check for 0 coefficient
+        for (int i = this.coefficients.length - 1; i > 0; i--) {
+            if (this.coefficients[i] != 0) {
+                this.degree = i;
+                break;
+            }
+        }
+
+        return this.degree;
+
     }
 
     
@@ -188,7 +213,7 @@ public class Polynomial {
     public String toString() {
 
         // initialize global property
-        this.polynomial = "";
+        String polynomial = "";
         
         // loop through coefficients
         for (int i = 0; i < this.coefficients.length; i++) {
@@ -203,8 +228,8 @@ public class Polynomial {
                 polynomialString = polynomialString + coefficients[i];
                 
                 // skip degree/x term if power is 0
-                if (powers[i] != 0) {
-                    polynomialString = polynomialString + "x^" + powers[i];
+                if (i != 0) {
+                    polynomialString = polynomialString + "x^" + i;
                 }
 
                 // add a positive sign if coefficient is positive
@@ -217,13 +242,13 @@ public class Polynomial {
 
             }
 
-            // assign the formed string to global property
-            this.polynomial = this.polynomial + polynomialString;
+            // assign the formed string
+            polynomial = polynomial + polynomialString;
         
         }
 
         // return the string representation
-        return this.polynomial;
+        return polynomial;
     }
 
     
@@ -237,7 +262,7 @@ public class Polynomial {
         double sum = 0;
 
         for (int i = 0; i < this.coefficients.length; i++) {
-            sum += this.coefficients[i] * Math.pow(x, powers[i]);
+            sum += this.coefficients[i] * Math.pow(x, i);
         }
 
         return sum;
