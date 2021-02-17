@@ -65,13 +65,13 @@ public class PolynomialTester {
         Polynomial pqCom = pForCompose.compose(qForCompose);
         System.out.println("compose() toString(): " + pqCom);
         
-        // double[] pForDivCoefficients = {3,4,1,3,0,2};        
-        // double[] qForDivCoefficients = {2,1};
-        // Polynomial pForDiv = new Polynomial(pForDivCoefficients);
-        // Polynomial qForDiv = new Polynomial(qForDivCoefficients);
+        double[] pForDivCoefficients = {3,4,1,3,0,2};        
+        double[] qForDivCoefficients = {2,1};
+        Polynomial pForDiv = new Polynomial(pForDivCoefficients);
+        Polynomial qForDiv = new Polynomial(qForDivCoefficients);
 
-        // Polynomial pqDiv = pForDiv.div(qForDiv);
-        // System.out.println("div() toString(): " + pqDiv);
+        Polynomial pqDiv = pForDiv.div(qForDiv);
+        System.out.println("div() toString(): " + pqDiv);
 
     }
 

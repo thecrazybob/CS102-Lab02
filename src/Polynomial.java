@@ -32,7 +32,7 @@ public class Polynomial {
         
         this.coefficients      = new double[1]; 
         this.coefficients[0]   = coefficient;
-        this.degree            = -1;
+        this.degree            = degree;
 
     }
 
@@ -171,11 +171,22 @@ public class Polynomial {
 
             Polynomial term = new Polynomial(0, this.coefficients[i]);
             newPolynomial = term.add(p2.mul(newPolynomial));
-            
+
         }
 
         return newPolynomial;
     
+    }
+
+    /** 
+     * Divides the polynomial on which method is called and the passed polynomial
+     * @param p2 - Polynomial which is passed 
+     * @return  quotient
+     */
+    public Polynomial div(Polynomial p2) {
+
+        return new Polynomial();
+        
     }
 
     /** 
@@ -228,8 +239,8 @@ public class Polynomial {
                 polynomialString = polynomialString + coefficients[i];
                 
                 // skip degree/x term if power is 0
-                if (i != 0) {
-                    polynomialString = polynomialString + "x^" + i;
+                if (this.getDegree() != 0) {
+                    polynomialString = polynomialString + "x^" + this.getDegree();
                 }
 
                 // add a positive sign if coefficient is positive
