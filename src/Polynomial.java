@@ -185,7 +185,27 @@ public class Polynomial {
      */
     public Polynomial div(Polynomial p2) {
 
-        return new Polynomial();
+        //intiates the polynomials polyDiv and polyQuotient
+        Polynomial polyDiv = this;
+        Polynomial polyQuotient = new Polynomial();
+        
+        //dividing smaller number by bigger number returns 0
+        if (p2.getDegree() > this.getDegree()) {
+            return polyQuotient;
+        }
+
+        for (int i = ((polyDiv.getDegree()-p2.getDegree()) + 1); i > 0 ; i--) {
+
+            //creates polyLead as the lab02 document specifies.
+            Polynomial polyLead = new Polynomial(i - p2.getDegree(), (polyDiv.getCoefficient(i) / p2.getCoefficient(p2.getDegree())));
+
+            // Uuses the formula given in the lab02 document to find the polynomial.
+            polyDiv = polyDiv.sub(polyLead.mul(p2));
+            polyQuotient = polyLead.add(polyQuotient);
+             
+        }
+
+        return polyQuotient;
         
     }
 
