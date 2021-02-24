@@ -30,8 +30,8 @@ public class Polynomial {
      */
     public Polynomial(int degree, double coefficient) {
         
-        this.coefficients      = new double[1]; 
-        this.coefficients[0]   = coefficient;
+        this.coefficients      = new double[degree + 1 ]; 
+        this.coefficients[degree]   = coefficient;
         this.degree            = degree;
 
     }
